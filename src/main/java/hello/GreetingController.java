@@ -19,6 +19,6 @@ public class GreetingController {
 
     @RequestMapping("/movies")
     public String movies(){
-        //TODO
+       return "movies";
     }
 }
