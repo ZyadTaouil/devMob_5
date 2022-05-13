@@ -26,7 +26,7 @@ public class GreetingController {
 
     @RequestMapping("/movies")
     public String movies(){
-      /* List<String> listMovies = new ArrayList<String>();
+       List<String> listMovies = new ArrayList<String>();
        String sqlSelectAllMovies = "SELECT * FROM movies";
        String connectionUrl = "jdbc:mysql://127.0.0.1:3306/movies?serverTimezone=UTC";
 
@@ -42,6 +42,6 @@ public class GreetingController {
             } catch (SQLException throwables){
                 throwables.printStackTrace();
             }
-        return listMovies.toString();*/
+        return listMovies.toString();
     }
 }
