@@ -1,5 +1,8 @@
 package hello;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +22,22 @@ public class GreetingController {
 
     @RequestMapping("/movies")
     public String movies(){
-       return "movies";
+       List<String> listMovies = new ArrayList<String>();
+       String sqlSelectAllMovies = "SELECT * FROM movies";
+       String connectionUrl = "jdbc:mysql://127.0.0.1:3306/movies?serverTimezone=UTC";
+
+       try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "admin")
+           PreparedStatement ps = conn.prepareStatement(sqlSelectAllMovies);
+           ResultSet rs = ps.executeQuery()){
+
+                while (rs.next()) {
+                    System.out.print("ICI");
+                    String title = rs.getString("title");
+                    listMovies.add(title);
+                }
+            } catch (SQLException throwables){
+                throwables.printStackTrace();
+            }
+        return listMovies.toString();
     }
 }
